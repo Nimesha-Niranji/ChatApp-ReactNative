@@ -1,12 +1,23 @@
 import {Input, Button} from '@rneui/base';
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Text, View , StyleSheet} from 'react-native'
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {auth} from '../firebase'
 
 
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-   
+    useEffect(() => {
+      const unsubscribe = auth.onAuthStateChanged(function(user) {
+        if (user) {
+            navigation.replace('Chat');
+        } else {
+          
+        }
+      });
+      return unsubscribe
+    },[])
 
   return (
     <View style={styles.container}>
