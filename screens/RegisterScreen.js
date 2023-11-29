@@ -5,7 +5,7 @@ import { getAuth, createUserWithEmailAndPassword,updateProfile } from '@react-na
 import {auth} from '../firebase'
 
 
-const RegisterScreen = () => {
+const RegisterScreen = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -23,6 +23,7 @@ const RegisterScreen = () => {
             }).catch((error) => {
             // An error occurred
             });
+            navigation.popToTop();
         })
         .catch((error) => {
             const errorMessage = error.message;

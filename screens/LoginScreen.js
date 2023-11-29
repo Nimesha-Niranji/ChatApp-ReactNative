@@ -24,7 +24,7 @@ const LoginScreen = ({navigation}) => {
         if (user) {
             navigation.replace('Chat');
         } else {
-          
+            navigation.canGoBack() && navigation.popToTop();
         }
       });
       return unsubscribe
@@ -47,8 +47,8 @@ const LoginScreen = ({navigation}) => {
             onChangeText={text => setPassword(text)}
             secureTextEntry />
 
-        <Button title='Sign in' onPress={signIn} style={styles.button}/>
-        <Button title='Register' style={styles.button}
+        <Button title='Sign in' onPress={signIn} buttonStyle={styles.button}/>
+        <Button title='Register' buttonStyle={styles.button}
             onPress={() => navigation.navigate('Register')} />
          
     </View>
@@ -57,9 +57,8 @@ const LoginScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   
     button:{
-      width: 400,
+      width: 200,
       marginTop: 20,
-      color:'red'
     },
     container:{
         flex:1,
