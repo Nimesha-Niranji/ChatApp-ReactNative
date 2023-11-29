@@ -26,7 +26,8 @@
     "react-native-element": "^1.2.1",
     "react-native-gifted-chat": "^2.4.0",
     "react-native-paper": "^5.11.1",
-    "react-native-vector-icons": "^10.0.2"
+    "react-native-vector-icons": "^10.0.2",
+    "@expo/vector-icons": "^13.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
