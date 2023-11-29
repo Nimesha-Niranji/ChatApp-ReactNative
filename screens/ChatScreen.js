@@ -1,10 +1,34 @@
-import React, { useLayoutEffect } from 'react' 
+import React, { useLayoutEffect, useState, useCallback, useEffect } from 'react' 
 import { View, Text, TouchableOpacity } from 'react-native'
 import {auth} from '../firebase'
 import { AntDesign } from '@expo/vector-icons';
 import { Avatar } from '@rneui/base';
+import { GiftedChat } from 'react-native-gifted-chat'
 
 const ChatScreen = ({navigation}) => {
+
+  const [messages, setMessages] = useState([])
+
+  useEffect(() => {
+    setMessages([
+      {
+        _id: 1,
+        text: 'Hello developer',
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'React Native',
+          avatar: 'https://placeimg.com/140/140/any',
+        },
+      },
+    ])
+  }, [])
+
+  const onSend = useCallback((messages = []) => {
+    setMessages(previousMessages =>
+      GiftedChat.append(previousMessages, messages),
+    )
+  }, [])
 
   const signOut = () => {
     auth.signOut().then(() => {
@@ -40,9 +64,13 @@ const ChatScreen = ({navigation}) => {
   },[])
 
   return (
-    <View>
-      <Text>Chat Screen</Text>
-    </View>
+    <GiftedChat
+      messages={messages}
+      onSend={messages => onSend(messages)}
+      user={{
+        _id: 1,
+      }}
+    />
   )
 }
 
